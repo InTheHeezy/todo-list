@@ -11,9 +11,9 @@ function App() {
   return (
     <div>
       <h1>My Todos</h1>
-      <u1>
+      <ul>
         {todoList.map(todo => <li key={todo.id}>{todo.title}</li>)}
-      </u1>
+      </ul>
     </div>
   );
 }
