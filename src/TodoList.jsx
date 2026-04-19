@@ -8,7 +8,7 @@ function TodoList({todoList}) {
           return(
             <TodoListItem
               key={todo.id}
-              title={todo.title}
+              todo={todo}
             />
           );
         })}
