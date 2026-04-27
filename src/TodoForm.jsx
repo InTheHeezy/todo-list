@@ -6,14 +6,8 @@ function TodoForm({ onAddTodo }) {
   const handleAddTodo = (event) => {
     event.preventDefault();
 
-    // Explore the event object (we'll remove this later)
-    console.log('Event object:', event);
-    console.log('Event target:', event.target);
-    console.log('Input value:', event.target.todoTitle.value);
-
-    // .trim prevents whitespace only todos
     const todoTitle = event.target.todoTitle.value.trim();
-    if (todoTitle && todoTitle !== "") {
+    if (todoTitle) {
       onAddTodo(todoTitle);
       event.target.reset();
       inputRef.current.focus();
