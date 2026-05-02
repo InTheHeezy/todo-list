@@ -4,6 +4,7 @@ function TodoList({todoList}) {
     
     return (
       <ul>
+        {todoList.length === 0 ?  <p> Add todo above to get started </p>: <></>} 
         {todoList.map((todo) => {
           return(
             <TodoListItem
