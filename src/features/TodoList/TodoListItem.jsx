@@ -4,15 +4,26 @@ import TextInputWithLabel from "../../shared/TextInputWithLabel";
 function TodoListItem({todo = {}, onCompleteTodo}) {
     
     const [isEditing, setIsEditing] = useState(false);
+    const [workingTitle, setWorkingTodoTitle] = useState(todo.title);
+
+    const handleCancel = (event) => {
+        setWorkingTodoTitle(todo.title);
+        setIsEditing(false);
+    }
 
     return (
         <li>
             <form>
-                {isEditing ? ( 
-                    <TextInputWithLabel 
-                        value={todo.title}
-                    /> ) : 
-                    (
+                {isEditing ? (
+                    <>
+                        <TextInputWithLabel 
+                            value={todo.title}
+                        />
+                        <button type="button" onClick={() => handleCancel}>
+                            Cancel 
+                        </button>
+                    </> 
+                    ) : (
                         <>
                             <label>
                                 <input
@@ -26,8 +37,7 @@ function TodoListItem({todo = {}, onCompleteTodo}) {
                                 </span>     
                             </label>
                         </>
-                    )
-                }
+                    )}
             </form>
         </li>
     );
