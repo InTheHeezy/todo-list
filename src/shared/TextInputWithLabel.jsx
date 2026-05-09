@@ -1,9 +1,21 @@
-export default function TextInputWithLabel() {
+export default function TextInputWithLabel({ 
+    elementId, 
+    labelText,
+    onChange,
+    ref,
+    value
+}) {
     
     return (
         <>
-            <label>Test</label>  
-            <input type="text"> </input>
+            <label htmlFor={elementId}>{labelText}</label>  
+            <input 
+                type="text"> 
+                id={elementId}
+                ref={ref}
+                value={value}
+                onChange={OnChange}
+            </input>
         </>      
     );
 }
