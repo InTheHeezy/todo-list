@@ -13,17 +13,19 @@ function TodoListItem({todo = {}, onCompleteTodo}) {
                         value={todo.title}
                     /> ) : 
                     (
-                        <label>
-                            <input
-                            type="checkbox"
-                            id={`checkbox${todo.id}`}
-                            checked={todo.isCompleted}
-                            onChange={() => onCompleteTodo(todo.id)}
-                             />
-                            <span onClick={() => setIsEditing(true)}>
-                                {todo.title} 
-                            </span>     
-                        </label>
+                        <>
+                            <label>
+                                <input
+                                type="checkbox"
+                                id={`checkbox${todo.id}`}
+                                checked={todo.isCompleted}
+                                onChange={() => onCompleteTodo(todo.id)}
+                                />
+                                <span onClick={() => setIsEditing(true)}>
+                                    {todo.title} 
+                                </span>     
+                            </label>
+                        </>
                     )
                 }
             </form>
