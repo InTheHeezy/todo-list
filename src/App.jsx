@@ -7,6 +7,13 @@ function App() {
 
   const [todoList, setTodoList] = useState([]);
 
+  function updateTodo(editedTodo) {
+    const updatedTodos = todoList.map(todo => 
+      todo.id === editedTodo.id ? { ...editedTodo } : todo
+    );
+    setTodoList(updatedTodos);
+  }
+
   function addTodo(todoTitle) {
     const newTodo = {
       id: Date.now(),
@@ -29,7 +36,7 @@ function App() {
     <div>
       <h1>My Todos</h1>
       <TodoForm onAddTodo={addTodo}/>
-      <TodoList todoList={todoList} onCompleteTodo={completeTodo}/>
+      <TodoList todoList={todoList} onCompleteTodo={completeTodo} onUpdateTodo={updateTodo}/>
     </div>
   );
 }
