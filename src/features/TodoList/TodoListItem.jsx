@@ -6,9 +6,13 @@ function TodoListItem({todo = {}, onCompleteTodo}) {
     const [isEditing, setIsEditing] = useState(false);
     const [workingTitle, setWorkingTodoTitle] = useState(todo.title);
 
-    const handleCancel = (event) => {
+    const handleCancel = () => {
         setWorkingTodoTitle(todo.title);
         setIsEditing(false);
+    }
+
+    const handleEdit = (event) => {
+        setWorkingTodoTitle(event.target.value);
     }
 
     return (
@@ -17,7 +21,8 @@ function TodoListItem({todo = {}, onCompleteTodo}) {
                 {isEditing ? (
                     <>
                         <TextInputWithLabel 
-                            value={todo.title}
+                            value={workingTitle}
+                            onChange={handleEdit}
                         />
                         <button type="button" onClick={() => handleCancel}>
                             Cancel 
