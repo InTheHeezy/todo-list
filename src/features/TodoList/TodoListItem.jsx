@@ -5,9 +5,6 @@ import { useEditableTitle } from "../../hooks/useEditableTitle";
 
 function TodoListItem({todo = {}, onCompleteTodo, onUpdateTodo}) {
     
-    //const [isEditing, setIsEditing] = useState(false);
-    //const [workingTitle, setWorkingTodoTitle] = useState(todo.title);
-
     const {
         isEditing,
         workingTitle,
