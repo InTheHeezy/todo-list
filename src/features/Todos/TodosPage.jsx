@@ -1,5 +1,5 @@
-import TodoList from './features/Todos/TodoList/TodoList';
-import TodoForm from './features/Todos/TodoForm';
+import TodoList from './TodoList/TodoList';
+import TodoForm from './TodoForm';
 import { useState } from 'react';
 
 export default function TodosPage() {
@@ -33,7 +33,6 @@ export default function TodosPage() {
 
     return (
         <div>
-        <h1>My Todos</h1>
         <TodoForm onAddTodo={addTodo}/>
         <TodoList todoList={todoList} onCompleteTodo={completeTodo} onUpdateTodo={updateTodo}/>
         </div>
