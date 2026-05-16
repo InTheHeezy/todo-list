@@ -12,8 +12,9 @@ export default function TodosPage({ token }) {
         if (!token) return;
 
         const fetchTodos = async () => {
+            setError('');
+            setIsTodoListLoading(true);
             try {
-                setIsTodoListLoading(true);
                 const response = await fetch('/api/tasks', {
                     method: 'GET',
                     headers: { 'X-CSRF-TOKEN' : token },
@@ -38,13 +39,37 @@ export default function TodosPage({ token }) {
         setTodoList(updatedTodos);
     }
 
-    function addTodo(todoTitle) {
+    async function addTodo(todoTitle) {
+        setError('');
         const newTodo = {
         id: Date.now(),
         title: todoTitle,
         isCompleted: false
         };
         setTodoList(previous => [newTodo, ...previous]);
+        try {
+            const reponse = await fetch('/api/tasks', {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                 },
+                credentials: 'include',
+                body:JSON.stringify({
+                    title: newTodo.title,
+                    isCompleted: newTodo.isCompleted
+                })
+            });
+            if(!reponse.ok) setError('Failed to add todo');
+
+            const serverTodo = await reponse.json();
+            setTodoList((prevList) => 
+                prevList.map((todo) => (todo.title === newTodo.title ? serverTodo : todo))
+            );
+        } catch (error) {
+            setTodoList((prevList) => prevList.filter((todo) => todo.name !== newTodo.name));
+            setError("Failed to add todo");
+        } 
     }
 
     function completeTodo (id) {  
