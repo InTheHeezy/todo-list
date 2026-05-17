@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export function Logon({
-    onSetEmail,
-    onSetToken
+    onSetEmail = () => {},
+    onSetToken = () => {}
 }){
 
     const [email, setEmail] = useState('');
@@ -10,7 +10,7 @@ export function Logon({
     const [isLoggingOn, setIsLoggingOn] = useState(false);
     const [AuthError, setAuthError] = useState('');
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         try{
             setIsLoggingOn(true); 
@@ -28,7 +28,7 @@ export function Logon({
             setAuthError('Authentication failed: $[data?.message}');
         }
         } catch (error) {
-            setAuthError('Error: ${error.name} | ${error.message}' );
+            setAuthError('Error: ${error.name}' | '${error.message}' );
         } finally {
             setIsLoggingOn(false);
         }
@@ -38,7 +38,7 @@ export function Logon({
         <div>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label html='email'>Email</label>
+                    <label htmlFor='email'>Email</label>
                     <input
                         id='email'
                         value={email}
@@ -48,9 +48,10 @@ export function Logon({
                     />
                 </div>
                 <div>
-                    <label html='password'>Password</label>
+                    <label htmlFor='password'>Password</label>
                     <input
                         id='password'
+                        type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
