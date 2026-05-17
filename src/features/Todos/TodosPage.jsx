@@ -64,23 +64,43 @@ export default function TodosPage({ token }) {
 
             const serverTodo = await reponse.json();
             setTodoList((prevList) => 
-                prevList.map((todo) => (todo.title === newTodo.title ? serverTodo : todo))
+                prevList.map((todo) => (todo.id === newTodo.id ? serverTodo : todo))
             );
         } catch (error) {
-            setTodoList((prevList) => prevList.filter((todo) => todo.name !== newTodo.name));
+            setTodoList((prevList) => prevList.filter((todo) => todo.id !== newTodo.id));
             setError("Failed to add todo");
         } 
     }
 
     async function completeTodo (id) {  
         setError('');
+        const originalTodo = todoList.map((todo) => todo.id === id);
+        if (!originalTodo) return;
+
         const updatedTodoList = todoList.map((todo) => 
         {
         if (todo.id === id) return { ...todo, isCompleted: true}
         else return todo;
         })
         setTodoList(updatedTodoList);
-        
+
+        try {
+            const response = await fetch('/api/tasks/${id}', {
+                method: "PATCH",
+                body:JSON.stringify({
+                    isCompleted:true,
+                    createdAt: originalTodo.createdAt,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': token
+                    }
+                })
+            })
+            if(!reponse.ok) setError('Failed to complete todo');
+        } catch (error) {
+            setTodoList((prevList) => prevList.map((todo) => (todo.id === id ? originalTodo : todo)));
+            setError('Failed to complete todo');
+        }
     }
 
     return (
