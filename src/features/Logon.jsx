@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export function Logon({
-    onSetEmail,
-    onSetToken
+    onSetEmail = () => {},
+    onSetToken = () => {}
 }){
 
     const [email, setEmail] = useState('');
@@ -24,7 +24,9 @@ export function Logon({
         if(response.status === 200 && data.name && data.csrfToken) {
             onSetEmail(data.name);
             onSetToken(data.csrfToken);
-        }} catch (error) {
+        }
+        if(!response.ok) setAuthError(`Error: ${error.name} | ${error.message}`);
+        } catch (error) {
             setAuthError(`Error: ${error.name} | ${error.message}`);
         } finally {
             setIsLoggingOn(false);

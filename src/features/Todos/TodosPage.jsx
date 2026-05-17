@@ -21,7 +21,7 @@ export default function TodosPage({ token }) {
                 });
                 if(response.status === 401) throw new Error('unauthorized');
                 if(!response.ok) throw new Error('Something went wrong');
-                const tasks = await response.json();
+                const { tasks } = await response.json();
                 setTodoList(tasks);
             } catch (error) {
                 setError(error.message);
@@ -34,7 +34,7 @@ export default function TodosPage({ token }) {
     },[token]);
 
     async function updateTodo(editedTodo) {
-        const originalTodo = todoList.map((todo) => todo.id === id);
+        const originalTodo = todoList.map((todo) => todo.id === editedTodo.id);
         if(!originalTodo) return;
 
         const updatedTodos = todoList.map(todo => 
@@ -56,7 +56,7 @@ export default function TodosPage({ token }) {
                     createdAt: editedTodo.createdAt
                 })
             });
-            if(!reponse.ok) setError('Failed to update todo');
+            if(!response.ok) setError('Failed to update todo');
         } catch (error) {
             setTodoList((prevList) => prevList.map((todo) => (todo.id === editedTodo.id ? originalTodo : todo)));
             setError('Failed to update todo');
@@ -85,7 +85,7 @@ export default function TodosPage({ token }) {
             });
             if(!response.ok) setError('Failed to add todo');
 
-            const serverTodo = await reponse.json();
+            const serverTodo = await response.json();
             setTodoList((prevList) => 
                 prevList.map((todo) => (todo.id === newTodo.id ? serverTodo : todo))
             );
