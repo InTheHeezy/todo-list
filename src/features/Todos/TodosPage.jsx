@@ -12,7 +12,6 @@ export default function TodosPage({ token }) {
         if (!token) return;
 
         const fetchTodos = async () => {
-            setError('');
             setIsTodoListLoading(true);
             try {
                 const response = await fetch('/api/tasks', {
@@ -33,7 +32,6 @@ export default function TodosPage({ token }) {
     },[token]);
 
     async function updateTodo(editedTodo) {
-        setError('');
         const originalTodo = todoList.map((todo) => todo.id === id);
         if(!originalTodo) return;
 
@@ -63,7 +61,6 @@ export default function TodosPage({ token }) {
     }
 
     async function addTodo(todoTitle) {
-        setError('');
         const newTodo = {
         id: Date.now(),
         title: todoTitle,
@@ -96,7 +93,6 @@ export default function TodosPage({ token }) {
     }
 
     async function completeTodo (id) {  
-        setError('');
         const originalTodo = todoList.map((todo) => todo.id === id);
         if (!originalTodo) return;
 
@@ -128,8 +124,17 @@ export default function TodosPage({ token }) {
 
     return (
         <div>
-        <TodoForm onAddTodo={addTodo}/>
-        <TodoList todoList={todoList} onCompleteTodo={completeTodo} onUpdateTodo={updateTodo}/>
+            {error && ( 
+                <div>
+                    <p>{error}</p>
+                    <button onClick={() => setError('')}>Clear Error</button>
+                </div>
+            )}
+            {isTodoListLoading && (
+                <div>Loading todo list...</div>
+            )}
+            <TodoForm onAddTodo={addTodo}/>
+            <TodoList todoList={todoList} onCompleteTodo={completeTodo} onUpdateTodo={updateTodo}/>
         </div>
     );
 }
