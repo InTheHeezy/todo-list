@@ -11,7 +11,7 @@ export default function App() {
 
   return(
     <>
-      <Header />
+      <Header onSetEmail={setEmail} token={token} onSetToken={setToken}/>
       {token ? (
         <TodosPage token={token}/>
       ) : (

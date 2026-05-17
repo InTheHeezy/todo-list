@@ -21,6 +21,8 @@ export default function TodosPage({ token }) {
                 });
                 if(response.status === 401) throw new Error('unauthorized');
                 if(!response.ok) throw new Error('Something went wrong');
+                const tasks = await response.json();
+                setTodoList(tasks);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -41,12 +43,13 @@ export default function TodosPage({ token }) {
         setTodoList(updatedTodos);
 
         try {
-            const response = await fetch('api/tasks/${editedTodo.id}', {
+            const response = await fetch(`api/tasks/${editedTodo.id}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': token
                 },
+                credentials: 'include',
                 body:JSON.stringify({
                     title: editedTodo.title,
                     isCompleted: editedTodo.isCompleted,
@@ -104,18 +107,19 @@ export default function TodosPage({ token }) {
         setTodoList(updatedTodoList);
 
         try {
-            const response = await fetch('/api/tasks/${id}', {
+            const response = await fetch(`/api/tasks/${id}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': token
                 },
+                credentials: 'include',
                 body:JSON.stringify({
                     isCompleted:true,
                     createdAt: originalTodo.createdAt
                 })
             })
-            if(!reponse.ok) setError('Failed to complete todo');
+            if(!response.ok) setError('Failed to complete todo');
         } catch (error) {
             setTodoList((prevList) => prevList.map((todo) => (todo.id === id ? originalTodo : todo)));
             setError('Failed to complete todo');
