@@ -8,7 +8,7 @@ export function Logon({
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggingOn, setIsLoggingOn] = useState(false);
-    const [AuthError, setAuthError] = useState('');
+    const [authError, setAuthError] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -24,11 +24,8 @@ export function Logon({
         if(response.status === 200 && data.name && data.csrfToken) {
             onSetEmail(data.name);
             onSetToken(data.csrfToken);
-        } else {
-            setAuthError('Authentication failed: $[data?.message}');
-        }
-        } catch (error) {
-            setAuthError('Error: ${error.name}' | '${error.message}' );
+        }} catch (error) {
+            setAuthError(`Error: ${error.name} | ${error.message}`);
         } finally {
             setIsLoggingOn(false);
         }
@@ -36,6 +33,7 @@ export function Logon({
 
     return (
         <div>
+            {authError && <div>{authError}</div>}
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor='email'>Email</label>
