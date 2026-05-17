@@ -66,7 +66,7 @@ export default function TodosPage({ token }) {
     async function addTodo(todoTitle) {
         const tempId = Date.now().toString();
         const newTodo = {
-        id: Date.now(),
+        id: tempId,
         title: todoTitle,
         isCompleted: false
         };
