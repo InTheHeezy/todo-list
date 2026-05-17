@@ -48,7 +48,7 @@ export default function TodosPage({ token }) {
         };
         setTodoList(previous => [newTodo, ...previous]);
         try {
-            const reponse = await fetch('/api/tasks', {
+            const response = await fetch('/api/tasks', {
                 method: "POST",
                 headers: { 
                     'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export default function TodosPage({ token }) {
                     isCompleted: newTodo.isCompleted
                 })
             });
-            if(!reponse.ok) setError('Failed to add todo');
+            if(!response.ok) setError('Failed to add todo');
 
             const serverTodo = await reponse.json();
             setTodoList((prevList) => 
@@ -72,13 +72,15 @@ export default function TodosPage({ token }) {
         } 
     }
 
-    function completeTodo (id) {  
+    async function completeTodo (id) {  
+        setError('');
         const updatedTodoList = todoList.map((todo) => 
         {
         if (todo.id === id) return { ...todo, isCompleted: true}
         else return todo;
         })
         setTodoList(updatedTodoList);
+        
     }
 
     return (
