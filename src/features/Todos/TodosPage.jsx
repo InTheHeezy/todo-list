@@ -32,11 +32,34 @@ export default function TodosPage({ token }) {
         fetchTodos();
     },[token]);
 
-    function updateTodo(editedTodo) {
+    async function updateTodo(editedTodo) {
+        setError('');
+        const originalTodo = todoList.map((todo) => todo.id === id);
+        if(!originalTodo) return;
+
         const updatedTodos = todoList.map(todo => 
         todo.id === editedTodo.id ? { ...editedTodo } : todo
         );
         setTodoList(updatedTodos);
+
+        try {
+            const response = await fetch('api/tasks/${editedTodo.id}', {
+                method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                },
+                body:JSON.stringify({
+                    title: editedTodo.title,
+                    isCompleted: editedTodo.isCompleted,
+                    createdAt: editedTodo.createdAt
+                })
+            });
+            if(!reponse.ok) setError('Failed to update todo');
+        } catch (error) {
+            setTodoList((prevList) => prevList.map((todo) => (todo.id === editedTodo.id ? originalTodo : todo)));
+            setError('Failed to update todo');
+        }
     }
 
     async function addTodo(todoTitle) {
@@ -87,13 +110,13 @@ export default function TodosPage({ token }) {
         try {
             const response = await fetch('/api/tasks/${id}', {
                 method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                },
                 body:JSON.stringify({
                     isCompleted:true,
-                    createdAt: originalTodo.createdAt,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': token
-                    }
+                    createdAt: originalTodo.createdAt
                 })
             })
             if(!reponse.ok) setError('Failed to complete todo');
