@@ -64,8 +64,9 @@ export default function TodosPage({ token }) {
     }
 
     async function addTodo(todoTitle) {
+        const tempId = Date.now().toString();
         const newTodo = {
-        id: Date.now().toString(),
+        id: Date.now(),
         title: todoTitle,
         isCompleted: false
         };
@@ -87,10 +88,10 @@ export default function TodosPage({ token }) {
 
             const serverTodo = await response.json();
             setTodoList((prevList) => 
-                prevList.map((todo) => (todo.id === newTodo.id ? serverTodo : todo))
+                prevList.map((todo) => (todo.id === tempId ? serverTodo : todo))
             );
         } catch (error) {
-            setTodoList((prevList) => prevList.filter((todo) => todo.id !== newTodo.id));
+            setTodoList((prevList) => prevList.filter((todo) => todo.id !== tempId));
             setError("Failed to add todo");
         } 
     }
