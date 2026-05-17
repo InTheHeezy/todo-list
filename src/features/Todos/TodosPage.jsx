@@ -34,7 +34,7 @@ export default function TodosPage({ token }) {
     },[token]);
 
     async function updateTodo(editedTodo) {
-        const originalTodo = todoList.map((todo) => todo.id === editedTodo.id);
+        const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
         if(!originalTodo) return;
 
         const updatedTodos = todoList.map(todo => 
@@ -43,7 +43,7 @@ export default function TodosPage({ token }) {
         setTodoList(updatedTodos);
 
         try {
-            const response = await fetch(`api/tasks/${editedTodo.id}`, {
+            const response = await fetch(`/api/tasks/${editedTodo.id}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ export default function TodosPage({ token }) {
     }
 
     async function completeTodo (id) {  
-        const originalTodo = todoList.map((todo) => todo.id === id);
+        const originalTodo = todoList.find((todo) => todo.id === id);
         if (!originalTodo) return;
 
         const updatedTodoList = todoList.map((todo) => 
