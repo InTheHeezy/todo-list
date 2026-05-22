@@ -2,7 +2,7 @@ export default function TextInputWithLabel({
     elementId, 
     labelText,
     onChange,
-    ref,
+    inputRef,
     value
 }) {
     
@@ -12,7 +12,7 @@ export default function TextInputWithLabel({
             <input 
                 type="text" 
                 id={elementId}
-                ref={ref}
+                ref={inputRef}
                 value={value}
                 onChange={onChange}
             />
