@@ -38,7 +38,7 @@ export default function TodosPage({ token }) {
         };
 
         fetchTodos();
-    },[token]);
+    },[token, sortBy, sortDirection]);
 
     async function updateTodo(editedTodo) {
         const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
