@@ -7,14 +7,21 @@ export default function TodosPage({ token }) {
     const [todoList, setTodoList] = useState([]);
     const [error, setError] = useState('');
     const [isTodoListLoading, setIsTodoListLoading] = useState(false);
+    const [sortBy, setSortBy] = useState('creationDate');
+    const [sortDirection, setSortDirection] = useState('desc')
+
 
     useEffect(() => {
         if (!token) return;
 
         const fetchTodos = async () => {
             setIsTodoListLoading(true);
+            const params = new URLSearchParams({
+                sortBy,
+                sortDirection
+            });
             try {
-                const response = await fetch('/api/tasks', {
+                const response = await fetch(`/api/tasks?${params}`, {
                     method: 'GET',
                     headers: { 'X-CSRF-TOKEN' : token },
                     credentials: 'include'
