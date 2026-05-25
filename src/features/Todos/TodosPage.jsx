@@ -1,7 +1,9 @@
 import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
+import useDebounce from '../../utils/useDebounce';
 import { useState, useEffect } from 'react';
+import FilterInput from '../../shared/FilterInput';
 
 export default function TodosPage({ token }) {
     
@@ -10,17 +12,20 @@ export default function TodosPage({ token }) {
     const [isTodoListLoading, setIsTodoListLoading] = useState(false);
     const [sortBy, setSortBy] = useState('creationDate');
     const [sortDirection, setSortDirection] = useState('desc')
-
+    const [filterTerm, setFilterTerm] = useState('');
+    const debouncedFilterTerm = useDebounce(filterTerm, 300);
 
     useEffect(() => {
         if (!token) return;
 
         const fetchTodos = async () => {
             setIsTodoListLoading(true);
-            const params = new URLSearchParams({
+            const paramsObject = {
                 sortBy,
                 sortDirection
-            });
+            }
+            if (debouncedFilterTerm) { paramsObject.find = debouncedFilterTerm; }
+            const params = new URLSearchParams(paramsObject);
             try {
                 const response = await fetch(`/api/tasks?${params}`, {
                     method: 'GET',
@@ -39,7 +44,7 @@ export default function TodosPage({ token }) {
         };
 
         fetchTodos();
-    },[token, sortBy, sortDirection]);
+    },[token, sortBy, sortDirection, debouncedFilterTerm]);
 
     async function updateTodo(editedTodo) {
         const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
@@ -135,6 +140,8 @@ export default function TodosPage({ token }) {
         }
     }
 
+    const handleFilterChange = (newTerm) => { setFilterTerm(newTerm); };
+
     return (
         <div>
             {error && ( 
@@ -151,6 +158,10 @@ export default function TodosPage({ token }) {
                 onSortByChange={setSortBy} 
                 sortDirection={sortDirection} 
                 onSortDirectionChange={setSortDirection}
+            />
+            <FilterInput 
+                filterTerm={filterTerm}
+                onFilterChange={handleFilterChange}
             />
             <TodoForm 
                 onAddTodo={addTodo}
