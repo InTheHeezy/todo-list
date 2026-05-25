@@ -15,6 +15,7 @@ export default function TodosPage({ token }) {
     const [filterTerm, setFilterTerm] = useState('');
     const debouncedFilterTerm = useDebounce(filterTerm, 300);
     const [dataVersion, setDataVersion] = useState(0);
+    const [filterError, setFilterError] = useState('');
 
     useEffect(() => {
         if (!token) return;
@@ -37,8 +38,13 @@ export default function TodosPage({ token }) {
                 if(!response.ok) throw new Error('Something went wrong');
                 const { tasks } = await response.json();
                 setTodoList(tasks);
+                setFilterError('');
             } catch (error) {
-                setError(error.message);
+                if (debouncedFilterTerm || sortBy !== 'creationDate' || sortDirection !== 'desc') {
+                    setFilterError(`Error filtering/sorting todos: ${error.message}`);
+                } else {
+                    setError(error.message);
+                }
             } finally {
                 setIsTodoListLoading(false);
             }
@@ -152,6 +158,18 @@ export default function TodosPage({ token }) {
 
     return (
         <div>
+            {filterError && (
+                <div>
+                    <p>{filterError}</p>
+                    <button onClick={() => setFilterError('')}>Clear Filter Error</button>
+                    <button onClick={() => {
+                        setFilterTerm('');
+                        setSortBy('creationDate');
+                        setSortDirection('desc');
+                        setFilterError('');
+                    }}>Reset Filters</button>
+                </div>
+            )}
             {error && ( 
                 <div>
                     <p>{error}</p>
