@@ -20,7 +20,7 @@ export default function SortBy({
             <select 
                 id="sortByDirection" 
                 value={sortDirection} 
-                onChange={(e) => onSortByChange(e.target.value)}
+                onChange={(e) => onSortDirectionChange(e.target.value)}
             >
                 <option value="" disabled>Choose an Option</option>
                 <option value='desc'>Descending</option>
