@@ -13,10 +13,10 @@ export default function SortBy({
                 onChange={(e) => onSortByChange(e.target.value)}
             >
                 <option value="" disabled>Choose an Option</option>
-                <option value="Creation Date">Creation Date</option>
+                <option value="creationDate">Creation Date</option>
                 <option value="title">Title</option>
             </select>
-            <label htmlFor="sortByDirection">Sort By:</label>
+            <label htmlFor="sortByDirection">Order</label>
             <select 
                 id="sortByDirection" 
                 value={sortDirection} 
