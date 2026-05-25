@@ -1,8 +1,15 @@
 import TodoListItem from "./TodoListItem";
 
-function TodoList({todoList, onCompleteTodo, onUpdateTodo}) {
+function TodoList({todoList, onCompleteTodo, onUpdateTodo, dataVersion}) {
 
-  const filteredTodoList = todoList.filter(todo => todo.isCompleted === false);
+  const filteredTodoList = useMemo(() => {
+    console.log(`Recalculating filtered todos (v${dataVersion})`)
+    const incompleteTodos = todoList.filter(todo => todo.isCompleted === false);
+    return {
+      version: dataVersion,
+      todos: incompleteTodos
+    };
+  },[todoList, dataVersion]);
 
   return filteredTodoList.length === 0 ? <p>Add todo above to get started</p>
   : (
