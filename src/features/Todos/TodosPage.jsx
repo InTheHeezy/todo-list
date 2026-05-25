@@ -2,7 +2,7 @@ import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
 import useDebounce from '../../utils/useDebounce';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import FilterInput from '../../shared/FilterInput';
 
 export default function TodosPage({ token }) {
@@ -14,6 +14,7 @@ export default function TodosPage({ token }) {
     const [sortDirection, setSortDirection] = useState('desc')
     const [filterTerm, setFilterTerm] = useState('');
     const debouncedFilterTerm = useDebounce(filterTerm, 300);
+    const [dataVersion, setDataVersion] = useState(0);
 
     useEffect(() => {
         if (!token) return;
@@ -46,6 +47,11 @@ export default function TodosPage({ token }) {
         fetchTodos();
     },[token, sortBy, sortDirection, debouncedFilterTerm]);
 
+    const invalidateCache = useCallback(() => {
+        setDataVersion(prev => prev + 1);
+        console.log("Invalidating memo cache after todo mutation");
+    },[]);
+
     async function updateTodo(editedTodo) {
         const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
         if(!originalTodo) return;
@@ -70,6 +76,7 @@ export default function TodosPage({ token }) {
                 })
             });
             if(!response.ok) throw new Error('Failed to update todo');
+            invalidateCache();
         } catch (error) {
             setTodoList((prevList) => prevList.map((todo) => (todo.id === editedTodo.id ? originalTodo : todo)));
             setError('Failed to update todo');
@@ -98,7 +105,7 @@ export default function TodosPage({ token }) {
                 })
             });
             if(!response.ok) throw new Error('Failed to add todo');
-
+            invalidateCache();
             const serverTodo = await response.json();
             setTodoList((prevList) => 
                 prevList.map((todo) => (todo.id === tempId ? serverTodo : todo))
@@ -134,6 +141,7 @@ export default function TodosPage({ token }) {
                 })
             })
             if(!response.ok) throw new Error('Failed to complete todo');
+            invalidateCache();
         } catch (error) {
             setTodoList((prevList) => prevList.map((todo) => (todo.id === id ? originalTodo : todo)));
             setError('Failed to complete todo');
