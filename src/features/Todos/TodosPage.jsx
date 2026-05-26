@@ -43,7 +43,7 @@ export default function TodosPage({ token }) {
                 if (debouncedFilterTerm || sortBy !== 'creationDate' || sortDirection !== 'desc') {
                     setFilterError(`Error filtering/sorting todos: ${error.message}`);
                 } else {
-                    setError(error.message);
+                    setError(`Error fetching todos: ${error.message}`);
                 }
             } finally {
                 setIsTodoListLoading(false);
@@ -158,6 +158,12 @@ export default function TodosPage({ token }) {
 
     return (
         <div>
+            {error && ( 
+                <div>
+                    <p>{error}</p>
+                    <button onClick={() => setError('')}>Clear Error</button>
+                </div>
+            )}
             {filterError && (
                 <div>
                     <p>{filterError}</p>
@@ -168,12 +174,6 @@ export default function TodosPage({ token }) {
                         setSortDirection('desc');
                         setFilterError('');
                     }}>Reset Filters</button>
-                </div>
-            )}
-            {error && ( 
-                <div>
-                    <p>{error}</p>
-                    <button onClick={() => setError('')}>Clear Error</button>
                 </div>
             )}
             {isTodoListLoading && (
