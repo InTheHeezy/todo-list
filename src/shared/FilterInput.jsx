@@ -4,7 +4,7 @@ export default function FilterInput({
 }) {
     return (
         <div>
-            <label htmlFor='filterInput'>Search Todos:</label>
+            <label htmlFor='filterInput'>Search todos:</label>
             <input
                 id='filterInput'
                 type='text'
