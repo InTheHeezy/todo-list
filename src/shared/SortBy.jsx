@@ -12,7 +12,6 @@ export default function SortBy({
                 value={sortBy} 
                 onChange={(e) => onSortByChange(e.target.value)}
             >
-                <option value="" disabled>Choose an Option</option>
                 <option value="creationDate">Creation Date</option>
                 <option value="title">Title</option>
             </select>
@@ -22,7 +21,6 @@ export default function SortBy({
                 value={sortDirection} 
                 onChange={(e) => onSortDirectionChange(e.target.value)}
             >
-                <option value="" disabled>Choose an Option</option>
                 <option value='desc'>Descending</option>
                 <option value='asc'>Ascending</option>
             </select>
