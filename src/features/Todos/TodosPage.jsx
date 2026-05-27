@@ -78,7 +78,6 @@ export default function TodosPage({ token }) {
                 body:JSON.stringify({
                     title: editedTodo.title,
                     isCompleted: editedTodo.isCompleted,
-                    //createdAt: editedTodo.createdAt
                 })
             });
             if(!response.ok) throw new Error('Failed to update todo');
@@ -143,7 +142,6 @@ export default function TodosPage({ token }) {
                 credentials: 'include',
                 body:JSON.stringify({
                     isCompleted:true,
-                    //createdAt: originalTodo.createdAt
                 })
             })
             if(!response.ok) throw new Error('Failed to complete todo');
