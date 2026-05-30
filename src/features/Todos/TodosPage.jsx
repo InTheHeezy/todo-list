@@ -70,10 +70,10 @@ export default function TodosPage({ token }) {
         const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
         if(!originalTodo) return;
 
-        const updatedTodos = todoList.map(todo => 
-        todo.id === editedTodo.id ? { ...editedTodo } : todo
-        );
-        setTodoList(updatedTodos);
+        dispatch ({
+            type: TODO_ACTIONS.UPDATE_TODO_START,
+            payload: editedTodo
+        });
 
         try {
             const response = await fetch(`/api/tasks/${editedTodo.id}`, {
