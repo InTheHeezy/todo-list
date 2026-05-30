@@ -95,7 +95,13 @@ export function todoReducer(state, action) {
 
         case COMPLETE_TODO_START:
             return {
-
+                ...state,
+                isTodoListLoading: false,
+                todoList: state.todoList.map((todo) => 
+                    todo.id === action.payload.id ? { ...todo, isCompleted: true } : todo
+                ),
+                error: '',
+                filterError: ''
             };    
 
         case COMPLETE_TODO_SUCCESS:
