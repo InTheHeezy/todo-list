@@ -96,8 +96,10 @@ export default function TodosPage({ token }) {
             });
 
         } catch (error) {
-            setTodoList((prevList) => prevList.map((todo) => (todo.id === editedTodo.id ? originalTodo : todo)));
-            setError('Failed to update todo');
+            dispatch({
+                type: TODO_ACTIONS.UPDATE_TODO_ERROR,
+                payload: { id: editedTodo.id, originalTodo: originalTodo, error: 'Failed to update todo'}
+            });
         }
     }
 
@@ -136,7 +138,6 @@ export default function TodosPage({ token }) {
                 payload: { tempId, serverTodo }
             });
         } catch (error) {
-            
             dispatch ({
                 type: TODO_ACTIONS.ADD_TODO_ERROR,
                 payload: { tempId, error: "Failed to add todo" }
