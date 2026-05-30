@@ -8,8 +8,12 @@ export const TODO_ACTIONS = {
     ADD_TODO_START: 'ADD_TODO_START',
     ADD_TODO_SUCCESS: 'ADD_TODO_SUCCESS',
     ADD_TODO_ERROR: 'ADD_TODO_ERROR',
-    COMPLETE_TODO: 'COMPLETE_TODO',
-    UPDATE_TODO: 'UPDATE_TODO',
+    COMPLETE_TODO_START: 'COMPLETE_TODO_START',
+    COMPLETE_TODO_SUCCESS: 'COMPLETE_TODO_SUCCESS',
+    COMPLETE_TODO_ERROR: 'COMPLETE_TODO_ERROR',
+    UPDATE_TODO_START: 'UPDATE_TODO_START',
+    UPDATE_TODO_SUCCESS: 'UPDATE_TODO_SUCCESS',
+    UPDATE_TODO_ERROR: 'UPDATE_TODO_ERROR',
 
     //UI operations
     SET_SORT: 'SET_SORT',
@@ -89,12 +93,32 @@ export function todoReducer(state, action) {
                 filterError: ''
             };    
 
-        case COMPLETE_TODO:
+        case COMPLETE_TODO_START:
             return {
-                
+
             };    
 
-        case UPDATE_TODO:
+        case COMPLETE_TODO_SUCCESS:
+            return {
+
+            };    
+
+        case COMPLETE_TODO_ERROR:
+            return {
+
+            };    
+
+        case UPDATE_TODO_START:
+            return {
+
+            };    
+
+        case UPDATE_TODO_SUCCESS:
+            return {
+
+            };    
+
+        case UPDATE_TODO_ERROR:
             return {
 
             };    
