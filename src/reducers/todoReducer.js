@@ -41,7 +41,22 @@ export function todoReducer(state, action) {
                 isTodoListLoading: true,
                 error: '',
                 filterError: ''
-            }
+            };
+
+        case FETCH_SUCCESS:
+            return {
+
+            };
+        
+        case FETCH_ERROR:
+            return {
+
+            };    
+
+        case ADD_TODO_START:
+            return {
+
+            };    
 
         default: 
             throw new Error(`Unknown action type: ${action.type}`);
