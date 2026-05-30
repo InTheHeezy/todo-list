@@ -90,6 +90,11 @@ export default function TodosPage({ token }) {
             });
             if(!response.ok) throw new Error('Failed to update todo');
             invalidateCache();
+            
+            dispatch({
+                type: TODO_ACTIONS.UPDATE_TODO_SUCCESS
+            });
+
         } catch (error) {
             setTodoList((prevList) => prevList.map((todo) => (todo.id === editedTodo.id ? originalTodo : todo)));
             setError('Failed to update todo');
