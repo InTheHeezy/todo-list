@@ -168,10 +168,14 @@ export default function TodosPage({ token }) {
             dispatch({
                 type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS
             });
-            
+
         } catch (error) {
-            setTodoList((prevList) => prevList.map((todo) => (todo.id === id ? originalTodo : todo)));
-            setError('Failed to complete todo');
+            
+            dispatch({
+                type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
+                payload: { id, originalTodo, error: 'Failed to complete todo' }
+            });
+
         }
     }
 
