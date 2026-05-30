@@ -18,3 +18,17 @@ export const TODO_ACTIONS = {
     RESET_FILTERS: 'RESET_FILTERS'
 
 };
+
+export const initialTodoState = {
+    
+    todoList: [],
+    error: '',
+    //CTD has this as true(?)
+    isTodoListLoading: false,
+    sortBy: 'creationDate',
+    //I had this as desc
+    sortDirection: 'asc',
+    filterTerm: '',
+    dataVersion: 0
+
+};
