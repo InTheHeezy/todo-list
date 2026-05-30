@@ -23,11 +23,9 @@ export const initialTodoState = {
     
     todoList: [],
     error: '',
-    //CTD has this as true(?)
     isTodoListLoading: false,
     sortBy: 'creationDate',
-    //I had this as desc
-    sortDirection: 'asc',
+    sortDirection: 'desc',
     filterTerm: '',
     dataVersion: 0
 
