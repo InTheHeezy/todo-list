@@ -106,7 +106,10 @@ export function todoReducer(state, action) {
 
         case COMPLETE_TODO_SUCCESS:
             return {
-
+                ...state,
+                isTodoListLoading: false,
+                error: '',
+                filterError: ''
             };    
 
         case COMPLETE_TODO_ERROR:

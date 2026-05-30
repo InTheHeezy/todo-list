@@ -164,6 +164,11 @@ export default function TodosPage({ token }) {
             })
             if(!response.ok) throw new Error('Failed to complete todo');
             invalidateCache();
+
+            dispatch({
+                type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS
+            });
+            
         } catch (error) {
             setTodoList((prevList) => prevList.map((todo) => (todo.id === id ? originalTodo : todo)));
             setError('Failed to complete todo');
