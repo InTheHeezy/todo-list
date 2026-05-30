@@ -45,12 +45,19 @@ export function todoReducer(state, action) {
 
         case FETCH_SUCCESS:
             return {
-
+                ...state,
+                isTodoListLoading: false,
+                todoList: action.payload,
+                error: '',
+                filterError: ''
             };
         
         case FETCH_ERROR:
             return {
-
+                ...state,
+                isTodoListLoading: false,
+                error: action.payload.error,
+                filterError: action.payload.filterError
             };    
 
         case ADD_TODO_START:
