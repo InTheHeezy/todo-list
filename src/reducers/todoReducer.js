@@ -62,7 +62,11 @@ export function todoReducer(state, action) {
 
         case ADD_TODO_START:
             return {
-                
+                ...state,
+                isTodoListLoading: false,
+                todoList: [action.payload, ...state.todoList],
+                error: '',
+                filterError: ''
             };    
         
         case ADD_TODO_SUCCESS:
@@ -104,6 +108,7 @@ export function todoReducer(state, action) {
             return {
 
             };    
+
         default: 
             throw new Error(`Unknown action type: ${action.type}`);
     }

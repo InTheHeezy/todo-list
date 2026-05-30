@@ -105,7 +105,12 @@ export default function TodosPage({ token }) {
         title: todoTitle,
         isCompleted: false
         };
-        setTodoList(previous => [newTodo, ...previous]);
+        
+        dispatch ({
+            type: TODO_ACTIONS.ADD_TODO_START,
+            payload: newTodo
+        });
+
         try {
             const response = await fetch('/api/tasks', {
                 method: "POST",
