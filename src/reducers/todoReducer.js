@@ -62,9 +62,48 @@ export function todoReducer(state, action) {
 
         case ADD_TODO_START:
             return {
+                
+            };    
+        
+        case ADD_TODO_SUCCESS:
+            return {
+
+            };    
+        
+        case ADD_TODO_ERROR:
+            return {
 
             };    
 
+        case COMPLETE_TODO:
+            return {
+
+            };    
+
+        case UPDATE_TODO:
+            return {
+
+            };    
+
+        case SET_SORT:
+            return {
+
+            };    
+
+        case SET_FILTER:
+            return {
+
+            };    
+
+        case CLEAR_ERROR:
+            return {
+
+            };    
+
+        case RESET_FILTERS:
+            return {
+
+            };    
         default: 
             throw new Error(`Unknown action type: ${action.type}`);
     }
