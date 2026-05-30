@@ -55,9 +55,7 @@ export default function TodosPage({ token }) {
                         payload: { error: `Error fetching todos: ${error.message}` }
                     })
                 }
-            } finally {
-
-            }
+            } 
         };
 
         fetchTodos();
