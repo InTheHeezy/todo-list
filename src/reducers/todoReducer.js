@@ -71,17 +71,27 @@ export function todoReducer(state, action) {
         
         case ADD_TODO_SUCCESS:
             return {
-
+                ...state,
+                isTodoListLoading: false,
+                todoList: state.todoList.map((todo) => 
+                    todo.id === action.payload.tempId ? action.payload.serverTodo : todo
+                ),
+                error: '',
+                filterError: ''
             };    
         
         case ADD_TODO_ERROR:
             return {
-
+                ...state,
+                isTodoListLoading: false,
+                todoList: state.todoList.filter((todo) => todo.id !== action.payload.tempId),
+                error: action.payload.error,
+                filterError: ''
             };    
 
         case COMPLETE_TODO:
             return {
-
+                
             };    
 
         case UPDATE_TODO:

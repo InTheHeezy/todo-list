@@ -127,12 +127,17 @@ export default function TodosPage({ token }) {
             if(!response.ok) throw new Error('Failed to add todo');
             invalidateCache();
             const serverTodo = await response.json();
-            setTodoList((prevList) => 
-                prevList.map((todo) => (todo.id === tempId ? serverTodo : todo))
-            );
+
+            dispatch ({
+                type: TODO_ACTIONS.ADD_TODO_SUCCESS,
+                payload: { tempId, serverTodo }
+            });
         } catch (error) {
-            setTodoList((prevList) => prevList.filter((todo) => todo.id !== tempId));
-            setError("Failed to add todo");
+            
+            dispatch ({
+                type: TODO_ACTIONS.ADD_TODO_ERROR,
+                payload: { tempId, error: "Failed to add todo" }
+            })
         } 
     }
 
