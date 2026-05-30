@@ -4,6 +4,7 @@ import SortBy from '../../shared/SortBy';
 import useDebounce from '../../utils/useDebounce';
 import { useState, useEffect, useCallback } from 'react';
 import FilterInput from '../../shared/FilterInput';
+import { TODO_ACTIONS } from '../../reducers/todoReducer';
 
 export default function TodosPage({ token }) {
     
@@ -21,7 +22,9 @@ export default function TodosPage({ token }) {
         if (!token) return;
 
         const fetchTodos = async () => {
-            setIsTodoListLoading(true);
+            
+            dispatch ({ type: TODO_ACTIONS.FETCH_START });
+
             const paramsObject = {
                 sortBy,
                 sortDirection
@@ -37,16 +40,23 @@ export default function TodosPage({ token }) {
                 if(response.status === 401) throw new Error('unauthorized');
                 if(!response.ok) throw new Error('Something went wrong');
                 const { tasks } = await response.json();
-                setTodoList(tasks);
-                setFilterError('');
+                
+                dispatch ({ type: TODO_ACTIONS.FETCH_SUCCESS, payload: tasks })
+
             } catch (error) {
                 if (debouncedFilterTerm || sortBy !== 'creationDate' || sortDirection !== 'desc') {
-                    setFilterError(`Error filtering/sorting todos: ${error.message}`);
+                    dispatch ({
+                        type: TODO_ACTIONS.FETCH_ERROR,
+                        payload: { filterError: `Error filtering/sorting todos: ${error.message}` }
+                    })
                 } else {
-                    setError(`Error fetching todos: ${error.message}`);
+                    dispatch ({
+                        type: TODO_ACTIONS.FETCH_ERROR,
+                        payload: { error: `Error fetching todos: ${error.message}` }
+                    })
                 }
             } finally {
-                setIsTodoListLoading(false);
+
             }
         };
 
