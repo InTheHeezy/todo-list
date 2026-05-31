@@ -37,7 +37,7 @@ export default function TodosPage({ token }) {
                 dispatch ({ type: TODO_ACTIONS.FETCH_SUCCESS, payload: tasks })
 
             } catch (error) {
-                if (debouncedFilterTerm || state.sortBy !== 'creationDate' || state.sortDirection !== 'desc') {
+                if (debouncedFilterTerm || state.sortBy !== 'createdAt' || state.sortDirection !== 'desc') {
                     dispatch ({
                         type: TODO_ACTIONS.FETCH_ERROR,
                         payload: { filterError: `Error filtering/sorting todos: ${error.message}` }
