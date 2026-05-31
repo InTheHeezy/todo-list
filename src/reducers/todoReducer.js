@@ -172,12 +172,24 @@ export function todoReducer(state, action) {
 
         case CLEAR_ERROR:
             return {
-
+                ...state,
+                error: '',
             };    
+           
+        case CLEAR_FILTER_ERROR:
+            return {
+                ...state,
+                filterError: ''
+            }    
 
         case RESET_FILTERS:
             return {
-
+                ...state,
+                filterTerm: '',
+                sortBy: 'creationDate',
+                sortDirection: 'desc',
+                error: '',
+                filterError: ''
             };    
 
         default: 

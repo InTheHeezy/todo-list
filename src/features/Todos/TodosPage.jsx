@@ -192,19 +192,14 @@ export default function TodosPage({ token }) {
             {error && ( 
                 <div>
                     <p>{error}</p>
-                    <button onClick={() => setError('')}>Clear Error</button>
+                    <button onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR})}>Clear Error</button>
                 </div>
             )}
             {filterError && (
                 <div>
                     <p>{filterError}</p>
-                    <button onClick={() => setFilterError('')}>Clear Filter Error</button>
-                    <button onClick={() => {
-                        setFilterTerm('');
-                        setSortBy('creationDate');
-                        setSortDirection('desc');
-                        setFilterError('');
-                    }}>Reset Filters</button>
+                    <button onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}>Clear Filter Error</button>
+                    <button onClick={() => dispatch({ type: TODO_ACTIONS.RESET_FILTERS })}>Reset Filters</button>
                 </div>
             )}
             {isTodoListLoading && (
