@@ -10,7 +10,7 @@ export function useAuth() {
     return context;
 }
 
-export function AuthContext({ children }){
+export function AuthProvider({ children }){
 
     const [email, setEmail] = useState('');
     const [token, setToken] = useState('');
