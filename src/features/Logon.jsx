@@ -1,36 +1,24 @@
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
-export function Logon({
-    onSetEmail,
-    onSetToken
-}){
+export function Logon(){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggingOn, setIsLoggingOn] = useState(false);
     const [authError, setAuthError] = useState('');
 
+    const { login } = useAuth();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try{
-            setIsLoggingOn(true); 
-            const response = await fetch('/api/users/logon', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ email, password })
-        });  
-        const data = await response.json(); 
-        if(response.status === 200 && data.name && data.csrfToken) {
-            onSetEmail(data.name);
-            onSetToken(data.csrfToken);
-        }
-        if(!response.ok) setAuthError(`Error: ${data.name} | ${data.message}`);
-        } catch (error) {
-            setAuthError(`Error: ${error.name} | ${error.message}`);
-        } finally {
+        setAuthError('');
+        setIsLoggingOn(true)
+        
+        if (!result.success) {
+            setAuthError(result.error);
             setIsLoggingOn(false);
-        }
+        } 
     }
 
     return (
