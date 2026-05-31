@@ -2,7 +2,7 @@ import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
 import useDebounce from '../../utils/useDebounce';
-import { useState, useEffect, useCallback, useReducer } from 'react';
+import { useEffect, useCallback, useReducer } from 'react';
 import FilterInput from '../../shared/FilterInput';
 import { initialTodoState, TODO_ACTIONS, todoReducer } from '../../reducers/todoReducer';
 
@@ -37,7 +37,7 @@ export default function TodosPage({ token }) {
                 dispatch ({ type: TODO_ACTIONS.FETCH_SUCCESS, payload: tasks })
 
             } catch (error) {
-                if (debouncedFilterTerm || state.sortBy !== 'creationDate' || sortDirection !== 'desc') {
+                if (debouncedFilterTerm || state.sortBy !== 'creationDate' || state.sortDirection !== 'desc') {
                     dispatch ({
                         type: TODO_ACTIONS.FETCH_ERROR,
                         payload: { filterError: `Error filtering/sorting todos: ${error.message}` }
@@ -216,7 +216,7 @@ export default function TodosPage({ token }) {
                 todoList={state.todoList} 
                 onCompleteTodo={completeTodo} 
                 onUpdateTodo={updateTodo}
-                dataVersion={dataVersion}
+                dataVersion={state.dataVersion}
             />
         </div>
     );
