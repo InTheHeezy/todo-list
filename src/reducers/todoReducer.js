@@ -155,12 +155,19 @@ export function todoReducer(state, action) {
 
         case SET_SORT:
             return {
-
+                ...state,
+                sortBy: action.payload.sortBy || state.sortBy,
+                sortDirection: action.payload.sortDirection || state.sortDirection,
+                error: '',
+                filterError: ''
             };    
 
         case SET_FILTER:
             return {
-
+                ...state,
+                filterTerm: action.payload,
+                error: '',
+                filterError: ''
             };    
 
         case CLEAR_ERROR:

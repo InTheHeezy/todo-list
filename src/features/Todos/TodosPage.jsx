@@ -2,12 +2,14 @@ import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
 import SortBy from '../../shared/SortBy';
 import useDebounce from '../../utils/useDebounce';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useReducer } from 'react';
 import FilterInput from '../../shared/FilterInput';
-import { TODO_ACTIONS } from '../../reducers/todoReducer';
+import { initialTodoState, TODO_ACTIONS, todoReducer } from '../../reducers/todoReducer';
 
 export default function TodosPage({ token }) {
     
+    const [state, dispatch] = useReducer(todoReducer, initialTodoState);
+
     const [todoList, setTodoList] = useState([]);
     const [error, setError] = useState('');
     const [isTodoListLoading, setIsTodoListLoading] = useState(false);
@@ -209,14 +211,17 @@ export default function TodosPage({ token }) {
                 <div>Loading todo list...</div>
             )}
             <SortBy 
-                sortBy={sortBy} 
-                onSortByChange={setSortBy} 
-                sortDirection={sortDirection} 
-                onSortDirectionChange={setSortDirection}
+                sortBy={state.sortBy} 
+                onSortByChange={(newSortBy) => 
+                    dispatch({ type: TODO_ACTIONS.SET_SORT, payload: { sortBy: newSortBy} })} 
+                sortDirection={state.sortDirection} 
+                onSortDirectionChange={(newDirection) => 
+                    dispatch({ type: TODO_ACTIONS.SET_SORT, payload: { sortDirection: newDirection} })}
             />
             <FilterInput 
-                filterTerm={filterTerm}
-                onFilterChange={handleFilterChange}
+                filterTerm={state.filterTerm}
+                onFilterChange={(newFilter) => 
+                    dispatch({ type: TODO_ACTIONS.SET_FILTER, payload: newFilter })}
             />
             <TodoForm 
                 onAddTodo={addTodo}
