@@ -15,6 +15,8 @@ export function Logon(){
         setAuthError('');
         setIsLoggingOn(true)
         
+        const result = await login(email, password);
+
         if (!result.success) {
             setAuthError(result.error);
             setIsLoggingOn(false);
