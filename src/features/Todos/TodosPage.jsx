@@ -5,11 +5,14 @@ import useDebounce from '../../utils/useDebounce';
 import { useEffect, useCallback, useReducer } from 'react';
 import FilterInput from '../../shared/FilterInput';
 import { initialTodoState, TODO_ACTIONS, todoReducer } from '../../reducers/todoReducer';
+import { useAuth } from '../../contexts/AuthContext'; 
 
-export default function TodosPage({ token }) {
+export default function TodosPage() {
     
     const [state, dispatch] = useReducer(todoReducer, initialTodoState);
     const debouncedFilterTerm = useDebounce(state.filterTerm, 300);
+
+    const { token } = useAuth();
 
     useEffect(() => {
         if (!token) return;
