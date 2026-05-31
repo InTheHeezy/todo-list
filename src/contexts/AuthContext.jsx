@@ -66,8 +66,9 @@ export function AuthProvider({ children }){
                 },
                 credentials: 'include'
             }
-            const response = await fetch('/users/logoff', options);
-
+            const res = await fetch('/users/logoff', options);
+            const data = await res.json();
+            
             if (res.status === 200) {
                 return { success: true };
             } else {
