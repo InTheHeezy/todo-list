@@ -4,6 +4,7 @@ import TodosPage from './features/Todos/TodosPage'
 import { Logon } from './features/Logon'
 import { useState } from 'react'
 import { useAuth } from './contexts/AuthContext' 
+import { Logoff } from './features/LogOff'
 
 export default function App() {
 
@@ -13,7 +14,10 @@ export default function App() {
     <>
       <Header />
       {isAuthenticated? (
-        <TodosPage />
+        <div>
+          <Logoff />
+          <TodosPage />
+        </div>
       ) : (
         <Logon />
       )}
