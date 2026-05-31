@@ -9,3 +9,25 @@ export function useAuth() {
     }
     return context;
 }
+
+export function AuthContext({ children }){
+
+    const [email, setEmail] = useState('');
+    const [token, setToken] = useState('');
+
+    //Functions go here...
+
+    const value = {
+        email,
+        token,
+        isAuthenticated: !!token,
+        login, 
+        logout,
+    };
+
+    return (
+        <AuthContext.Provider value={value}>
+            {children}
+        </AuthContext.Provider>
+    );
+}
