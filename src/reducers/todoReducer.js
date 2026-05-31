@@ -192,6 +192,12 @@ export function todoReducer(state, action) {
                 filterError: ''
             };    
 
+        case INCREMENT_VERSION:
+            return {
+                ...state, 
+                dataVersion: state.dataVersion + 1
+            }
+
         default: 
             throw new Error(`Unknown action type: ${action.type}`);
     }
