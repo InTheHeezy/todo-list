@@ -29,7 +29,7 @@ export function AuthProvider({ children }){
             const data = await res.json();
 
             if (res.status === 200 && data.name && data.csrfToken) {
-            //Success: update state
+
             setEmail(data.name);
             setToken(data.csrfToken);
             return { success: true };
