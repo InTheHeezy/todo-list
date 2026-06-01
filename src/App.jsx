@@ -14,7 +14,6 @@ export default function App() {
       <Header />
       {isAuthenticated? (
         <div>
-          <Logoff />
           <TodosPage />
         </div>
       ) : (
