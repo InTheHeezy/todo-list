@@ -1,7 +1,7 @@
 import './App.css'
 import { Route, Routes } from 'react-router'
 import Header from './shared/Header'
-import TodosPage from './features/Todos/TodosPage'
+import TodosPage from './pages/TodosPage'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
