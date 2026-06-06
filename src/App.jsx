@@ -2,9 +2,9 @@ import './App.css'
 import { Route, Routes } from 'react-router'
 import Header from './shared/Header'
 import TodosPage from './features/Todos/TodosPage'
-import { Logon } from './features/Logon'
+import LoginPage from './pages/LoginPage'
+import  HomePage  from './pages/HomePage'
 import { Logoff } from './features/LogOff'
-import { HomePage } from './pages/HomePage'
 
 export default function App() {
   return(
