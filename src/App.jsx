@@ -1,24 +1,32 @@
 import './App.css'
+import { Route, Routes } from 'react-router'
 import Header from './shared/Header'
 import TodosPage from './features/Todos/TodosPage'
 import { Logon } from './features/Logon'
-import { useAuth } from './contexts/AuthContext' 
 import { Logoff } from './features/LogOff'
 
 export default function App() {
-
-  const { isAuthenticated } = useAuth();
-
   return(
     <>
       <Header />
-      {isAuthenticated? (
-        <div>
-          <TodosPage />
-        </div>
-      ) : (
-        <Logon />
-      )}
+      <Routes>
+        <Route to="/" element={<HomePage />} />
+        <Route to="/about" element={<AboutPage />} />
+        <Route to="/login" element={<LoginPage />} />
+        <Route to="/todos" element={
+          <RequireAuth>
+            <TodosPage />
+          </RequireAuth>
+          }
+        />
+        <Route to="/profile" element={
+          <RequireAuth>
+            <ProfilePage />
+          </RequireAuth>
+          }
+        />
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
     </>
   )
 }
