@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router'
 import Header from './shared/Header'
 import TodosPage from './features/Todos/TodosPage'
 import LoginPage from './pages/LoginPage'
-import  HomePage  from './pages/HomePage'
+import HomePage from './pages/HomePage'
 import { Logoff } from './features/LogOff'
 
 export default function App() {
