@@ -4,6 +4,7 @@ import Header from './shared/Header'
 import TodosPage from './features/Todos/TodosPage'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
+import AboutPage from './pages/AboutPage'
 import { Logoff } from './features/LogOff'
 
 export default function App() {
