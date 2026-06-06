@@ -30,7 +30,7 @@ export const initialTodoState = {
     todoList: [],
     error: '',
     filterError: '',
-    isTodoListLoading: false,
+    isTodoListLoading: true,
     sortBy: 'createdAt',
     sortDirection: 'desc',
     filterTerm: '',
@@ -62,8 +62,8 @@ export function todoReducer(state, action) {
             return {
                 ...state,
                 isTodoListLoading: false,
-                error: action.payload.error,
-                filterError: action.payload.filterError
+                error: '',
+                filterError: ''
             };    
 
         case TODO_ACTIONS.ADD_TODO_START:
