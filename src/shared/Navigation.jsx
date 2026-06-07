@@ -26,7 +26,14 @@ export default function Navigation(){
                     <NavLink to="/about" style={navLinkStyle}>About</NavLink>
                 </li>
                 {isAuthenticated ? (
-                    <NavLink to="/todos" style={navLinkStyle}>Todos</NavLink>
+                    <>
+                        <li>
+                            <NavLink to="/todos" style={navLinkStyle}>Todos</NavLink>    
+                        </li>
+                        <li>
+                            <NavLink to="/profile" style={navLinkStyle}>Profile</NavLink>
+                        </li>
+                    </>
                 ) : (
                     <NavLink to="/login" style={navLinkStyle}>Login</NavLink>
                 )}
