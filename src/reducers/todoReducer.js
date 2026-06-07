@@ -3,6 +3,9 @@ export const TODO_ACTIONS = {
     FETCH_START: 'FETCH_START',
     FETCH_SUCCESS: 'FETCH_SUCCESS',
     FETCH_ERROR: 'FETCH_ERROR',
+    FETCH_STATS_START: 'FETCH_STATS_START',
+    FETCH_STATS_SUCCESS: 'FETCH_STATS_SUCCESS',
+    FETCH_STATS_ERROR: 'FETCH_STATS_ERROR',
 
     //Todo operations
     ADD_TODO_START: 'ADD_TODO_START',
@@ -30,7 +33,10 @@ export const initialTodoState = {
     todoList: [],
     error: '',
     filterError: '',
+    statsError: '',
     isTodoListLoading: true,
+    isStatsLoading: true,
+    profileStats: { total: 0, completed: 0, active: 0 },
     sortBy: 'createdAt',
     sortDirection: 'desc',
     filterTerm: '',
@@ -65,6 +71,28 @@ export function todoReducer(state, action) {
                 error: '',
                 filterError: ''
             };    
+
+        case TODO_ACTIONS.FETCH_STATS_START:
+            return {
+                ...state,
+                isStatsLoading: true,
+                statsError: ''
+            }
+
+        case TODO_ACTIONS.FETCH_STATS_SUCCESS:
+            return {
+                ...state,
+                isStatsLoading: false,
+                profileStats: action.payload,
+                statsError: ''
+            }   
+            
+        case TODO_ACTIONS.FETCH_STATS_ERROR:
+            return {
+                ...state,
+                isStatsLoading: false,
+                statsError: action.payload
+            }
 
         case TODO_ACTIONS.ADD_TODO_START:
             return {
