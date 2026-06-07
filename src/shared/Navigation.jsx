@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 function navLinkStyle ({ isActive }) {
     return {
         fontWeight: isActive ? "bold" : "normal",
-        textStyle: isActive ? "underline" : "none"
+        textDecoration: isActive ? "underline" : "none"
     };
 }
 
@@ -35,7 +35,9 @@ export default function Navigation(){
                         </li>
                     </>
                 ) : (
-                    <NavLink to="/login" style={navLinkStyle}>Login</NavLink>
+                    <li>
+                      <NavLink to="/login" style={navLinkStyle}>Login</NavLink>  
+                    </li>
                 )}
             </ul>
         </nav>
