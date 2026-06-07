@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function RequireAuth( children ){
+export default function RequireAuth( {children} ){
     const { isAuthenticated } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
