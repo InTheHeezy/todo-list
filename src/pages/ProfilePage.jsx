@@ -22,7 +22,7 @@ export default function ProfilePage() {
                     credentials: 'include'
                 });
                 
-                if(response.status === 400) throw new Error('Unauthorized');
+                if(response.status === 401) throw new Error('Unauthorized');
                 if(!response.ok) throw new Error('Failed to fetch profile stats');
                 
                 const todos = await response.json();
