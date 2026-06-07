@@ -7,7 +7,6 @@ import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import ProfilePage from './pages/ProfilePage'
 import NotFoundPage from './pages/NotFoundPage'
-import { Logoff } from './features/LogOff'
 
 export default function App() {
   return(
