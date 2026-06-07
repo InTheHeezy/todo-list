@@ -1,68 +1,94 @@
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState } from "react"; // Changed to use useState as requested
 import { useAuth } from "../contexts/AuthContext";
-import { initialTodoState, TODO_ACTIONS, todoReducer } from "../reducers/todoReducer";
 
 export default function ProfilePage() {
-    
-    const [state, dispatch]= useReducer(todoReducer, initialTodoState);
-    const { user, token } = useAuth();
+
+    const [stats, setStats] = useState({ total: 0, completed: 0, active: 0 });
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const { email, token } = useAuth();
     
     useEffect(() => {
         if (!token) return;
 
         const fetchTodoStats = async () => {
-
-            dispatch ({ type: TODO_ACTIONS.FETCH_STATS_START })
+            setIsLoading(true);
+            setError(null);
 
             try {
-                const response = await fetch("/api/tasks/stats", {
+                const response = await fetch("/api/tasks", {
                     method: 'GET',
                     headers: { 'X-CSRF-TOKEN' : token },
                     credentials: 'include'
                 });
-
+                
+                if(response.status === 400) throw new Error('Unauthorized');
                 if(!response.ok) throw new Error('Failed to fetch profile stats');
-                const data = await response.json();
-                dispatch({ type: TODO_ACTIONS.FETCH_STATS_SUCCESS, payload: data });
+                
+                const todos = await response.json();
+                const todosArray = todos.tasks || [];
+
+                const total = todosArray.length;
+                const completed = todosArray.filter((todo) => todo.isCompleted).length;
+                const active = total - completed;
+
+                setStats({ total, completed, active });
 
             } catch (error) {
-                dispatch({ type: TODO_ACTIONS.FETCH_STATS_ERROR, payload: error.message })
+                setError(error.message);
+            } finally {
+                setIsLoading(false);
             }
         }
 
         fetchTodoStats();
     }, [token]);
 
+    const completionPercentage = stats.total > 0 
+        ? Math.round((stats.completed / stats.total) * 100) 
+        : 0;
+
     return (
         <div>
             <h1>User Profile</h1>
             <section>
-                <h2>{user?.email}</h2>
+                <h2>Name: {email}</h2>
+                <p>Status: {token ? "Authenticated" : "Not Authenticated"}</p>
             </section>
+            
             <section>
                 <h2>Todo Stats</h2>
-                {state.isStatsLoading && (
+                
+                {isLoading && (
                     <div>Loading stats...</div>
                 )}
-                {state.statsError && (
-                    <div>Error: {state.statsError}</div>
+                
+                {error && (
+                    <div>Error: {error}</div>
                 )}
-                {!state.isStatsLoading && !state.statsError && (
+                
+                {!isLoading && !error && (
                     <div>
                         <div>
                             <h3>Total</h3>
-                            <p>{state.profileStats.total}</p>
+                            <p>{stats.total}</p>
                         </div>
                         <div>
                             <h3>Active</h3>
-                            <p>{state.profileStats.active}</p>
+                            <p>{stats.active}</p>
                         </div>
                         <div>
                             <h3>Completed</h3>
-                            <p>{state.profileStats.completed}</p>
-                        </div>        
+                            <p>{stats.completed}</p>
+                        </div>
+
+                        {stats.total > 0 && (
+                            <div>
+                                <h3>Completion Rate</h3>
+                                <p>{completionPercentage}%</p>
+                            </div>
+                        )}       
                     </div>
-                    
                 )}
             </section>
         </div>
