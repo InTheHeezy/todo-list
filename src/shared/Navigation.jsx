@@ -8,7 +8,7 @@ function navLinkStyle ({ isActive }) {
     };
 }
 
-function Navigation(){
+export default function Navigation(){
 
     const { isAuthenticated } = useAuth();
 
