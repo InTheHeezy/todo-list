@@ -6,12 +6,17 @@ import { useEffect, useCallback, useReducer } from 'react';
 import FilterInput from '../shared/FilterInput';
 import { initialTodoState, TODO_ACTIONS, todoReducer } from '../reducers/todoReducer';
 import { useAuth } from '../contexts/AuthContext'; 
+import { useSearchParams } from 'react-router';
+import StatusFilter from '../shared/StatusFilter';
 
 export default function TodosPage() {
     
     const [state, dispatch] = useReducer(todoReducer, initialTodoState);
     const debouncedFilterTerm = useDebounce(state.filterTerm, 300);
-
+    const [searchParams] = useSearchParams();
+    
+    const statusFilter = searchParams.get('status') || 'all';
+  
     const { token } = useAuth();
 
     useEffect(() => {
@@ -207,6 +212,7 @@ export default function TodosPage() {
                 onSortDirectionChange={(newDirection) => 
                     dispatch({ type: TODO_ACTIONS.SET_SORT, payload: { sortDirection: newDirection} })}
             />
+            <StatusFilter />
             <FilterInput 
                 filterTerm={state.filterTerm}
                 onFilterChange={(newFilter) => 
@@ -220,6 +226,7 @@ export default function TodosPage() {
                 onCompleteTodo={completeTodo} 
                 onUpdateTodo={updateTodo}
                 dataVersion={state.dataVersion}
+                statusFilter={statusFilter}
             />
         </div>
     );
