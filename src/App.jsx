@@ -14,16 +14,16 @@ export default function App() {
     <>
       <Header />
       <Routes>
-        <Route to="/" element={<HomePage />} />
-        <Route to="/about" element={<AboutPage />} />
-        <Route to="/login" element={<LoginPage />} />
-        <Route to="/todos" element={
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/todos" element={
           <RequireAuth>
             <TodosPage />
           </RequireAuth>
           }
         />
-        <Route to="/profile" element={
+        <Route path="/profile" element={
           <RequireAuth>
             <ProfilePage />
           </RequireAuth>
