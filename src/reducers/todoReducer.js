@@ -83,7 +83,7 @@ export function todoReducer(state, action) {
             return {
                 ...state,
                 isStatsLoading: false,
-                profileStats: action.payload,
+                profileStats: action.payload.profileStats,
                 statsError: ''
             }   
             
