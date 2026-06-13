@@ -21,13 +21,12 @@ body {
   justify-self: start;
 }
 
-/* 1. This centers the navigation container */
 .nav-links {
   justify-self: center;
 }
 
 .nav-links ul {
-  list-style-type: none; /* Removes the default bullet points */
+  list-style-type: none; 
   margin: 0;
   padding: 0;
   display: flex;
