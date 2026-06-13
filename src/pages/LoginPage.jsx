@@ -35,10 +35,10 @@ export default function LoginPage() {
     }
 
     return (
-        <div>
-            {authError && <div>{authError}</div>}
+        <div className="login-page">
             <form onSubmit={handleSubmit}>
-                <div>
+                {authError && <div className="auth-error">{authError}</div>}
+                <div className="input-group">
                     <label htmlFor='email'>Email</label>
                     <input
                         id='email'
@@ -48,7 +48,7 @@ export default function LoginPage() {
                         disabled={isLoggingOn}
                     />
                 </div>
-                <div>
+                <div className="input-group">
                     <label htmlFor='password'>Password</label>
                     <input
                         id='password'
@@ -59,7 +59,7 @@ export default function LoginPage() {
                         disabled={isLoggingOn}
                     />
                 </div>
-                <button type="submit" disabled={isLoggingOn}>
+                <button type="submit" className="btn-login" disabled={isLoggingOn}>
                     {isLoggingOn ? 'Logging on...' : 'Logon'}
                 </button>
             </form>

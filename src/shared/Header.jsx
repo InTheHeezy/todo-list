@@ -7,8 +7,8 @@ export default function Header() {
     const { isAuthenticated } = useAuth();
     
     return (
-        <header>
-            <h1>Todo List</h1>
+        <header className="main-header">
+            <h1 className="logo">Todo List</h1>
             <Navigation />
             {isAuthenticated && <Logoff />}
         </header>
