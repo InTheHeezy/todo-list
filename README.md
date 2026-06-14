@@ -6,7 +6,7 @@ A TODO management application built with React that allows users, through authen
 
 ### 🔐 Authentication
 
-![Login Screen](assets/login-page.png)
+![Login Screen](src/assets/login-page.png)
 
 * Secure login and logout functionality
 * Protected routes using React Router
@@ -15,7 +15,7 @@ A TODO management application built with React that allows users, through authen
 
 ### 📝 Todo Management
 
-![Main Todo List](assets/todos-page.png)
+![Main Todo List](src/assets/todos-page.png)
 
 * Create new todos
 * Edit existing todos
@@ -36,7 +36,7 @@ A TODO management application built with React that allows users, through authen
 
 ### 📊 User Dashboard
 
-![Profile stats](assets/profile-page.png)
+![Profile stats](src/assets/profile-page.png)
 
 * User profile page
 * Todo statistics
@@ -189,7 +189,7 @@ This project demonstrates:
 
 ## ✍️ Author
 
-![About The Application](assets/about-page.png)
+![About The Application](src/assets/about-page.png)
 
 Tonny An
 
