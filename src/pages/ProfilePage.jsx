@@ -49,14 +49,14 @@ export default function ProfilePage() {
         : 0;
 
     return (
-        <div>
+        <div className="profile-page">
             <h1>User Profile</h1>
-            <section>
+            <section className="profile-page-name">
                 <h2>Name: {email}</h2>
                 <p>Status: {token ? "Authenticated" : "Not Authenticated"}</p>
             </section>
             
-            <section>
+            <section className="profile-page-stats">
                 <h2>Todo Stats</h2>
                 
                 {isLoading && (
@@ -68,22 +68,22 @@ export default function ProfilePage() {
                 )}
                 
                 {!isLoading && !error && (
-                    <div>
-                        <div>
+                    <div className="profile-page-stats">
+                        <div className="profile-page-stats">
                             <h3>Total</h3>
                             <p>{stats.total}</p>
                         </div>
-                        <div>
+                        <div className="profile-page-stats">
                             <h3>Active</h3>
                             <p>{stats.active}</p>
                         </div>
-                        <div>
+                        <div className="profile-page-stats">
                             <h3>Completed</h3>
                             <p>{stats.completed}</p>
                         </div>
 
                         {stats.total > 0 && (
-                            <div>
+                            <div className="profile-page-stats">
                                 <h3>Completion Rate</h3>
                                 <p>{completionPercentage}%</p>
                             </div>
