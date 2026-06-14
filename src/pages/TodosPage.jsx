@@ -187,7 +187,7 @@ export default function TodosPage() {
     }
 
     return (
-        <div>
+        <div className='todos-page'>
             {state.error && ( 
                 <div>
                     <p>{state.error}</p>

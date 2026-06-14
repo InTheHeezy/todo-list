@@ -48,12 +48,30 @@ body {
   text-decoration: underline;
 }
 
+.about-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; 
+  padding: 20px;
+  flex-direction: column;
+}
+
 .login-page {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 80vh; 
   padding: 20px;
+}
+
+.todos-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; 
+  padding: 20px;
+  flex-direction: column;
 }
 
 .input-group {
@@ -91,15 +109,6 @@ body {
   margin-bottom: 20px;       
   font-size: 0.9rem;
   text-align: center;
-}
-
-.about-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh; 
-  padding: 20px;
-  flex-direction: column;
 }
 
 .btn-login {
