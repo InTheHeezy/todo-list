@@ -2,7 +2,7 @@ export default function AboutPage() {
     return (
         <div className="about-page">
             <h1>About this Todo App</h1>
-            <p>This was made during a Code The Dream apprentenceship in Spring 2026 - Summer 2026</p>
+            <p>This was made by Tonny An during a Code The Dream apprentenceship in Spring 2026 - Summer 2026</p>
             <h2>App features</h2>
             <ul>
                 <li>Login/Logout for private todo lists</li>
