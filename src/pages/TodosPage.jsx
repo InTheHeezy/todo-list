@@ -66,7 +66,6 @@ export default function TodosPage() {
         dispatch ({
             type: TODO_ACTIONS.INCREMENT_VERSION
         });
-        //console.log("Invalidating memo cache after todo mutation");
     },[]);
 
     async function updateTodo(editedTodo) {
@@ -204,6 +203,7 @@ export default function TodosPage() {
             {state.isTodoListLoading && (
                 <div>Loading todo list...</div>
             )}
+            <StatusFilter />
             <SortBy 
                 sortBy={state.sortBy} 
                 onSortByChange={(newSortBy) => 
@@ -212,7 +212,6 @@ export default function TodosPage() {
                 onSortDirectionChange={(newDirection) => 
                     dispatch({ type: TODO_ACTIONS.SET_SORT, payload: { sortDirection: newDirection} })}
             />
-            <StatusFilter />
             <FilterInput 
                 filterTerm={state.filterTerm}
                 onFilterChange={(newFilter) => 

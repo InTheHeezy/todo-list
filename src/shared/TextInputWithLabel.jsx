@@ -15,6 +15,7 @@ export default function TextInputWithLabel({
                 ref={inputRef}
                 value={value}
                 onChange={onChange}
+                placeholder="Add a todo..."
             />
         </>      
     );

@@ -74,6 +74,27 @@ body {
   flex-direction: column;
 }
 
+.status-filter {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  gap: 8px;
+}
+
+.sort-by {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  gap: 8px;
+}
+
+.filter-input {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px; 
+  gap: 8px;
+}
+
 .input-group {
   display: flex;
   flex-direction: column;
