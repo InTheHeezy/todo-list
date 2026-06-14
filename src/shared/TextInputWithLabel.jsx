@@ -7,7 +7,7 @@ export default function TextInputWithLabel({
 }) {
     
     return (
-        <>
+        <div className="input-group">
             <label htmlFor={elementId}>{labelText}</label>  
             <input 
                 type="text" 
@@ -17,6 +17,6 @@ export default function TextInputWithLabel({
                 onChange={onChange}
                 placeholder="Add a todo..."
             />
-        </>      
+        </div>      
     );
 }

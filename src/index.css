@@ -50,27 +50,27 @@ body {
 
 .about-page {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  min-height: 80vh; 
-  padding: 20px;
+  min-height: auto; 
+  padding: 40px 20px;
   flex-direction: column;
 }
 
 .login-page {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  min-height: 80vh; 
-  padding: 20px;
+  min-height: auto; 
+  padding: 40px 20px;
 }
 
 .todos-page {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  min-height: 80vh; 
-  padding: 20px;
+  min-height: auto; 
+  padding: 40px 20px;
   flex-direction: column;
 }
 
@@ -93,6 +93,19 @@ body {
   flex-direction: row;
   margin-bottom: 20px; 
   gap: 8px;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px; 
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.todo-form .input-group {
+  flex: 1;               
+  margin-bottom: 0;      
 }
 
 .input-group {
@@ -171,5 +184,31 @@ body {
 
 .btn-logout:disabled {
   background-color: #a0cfff;
+  cursor: not-allowed;
+}
+
+.btn-add-todo {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 0 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  height: 45px; 
+  box-sizing: border-box;
+  transition: background-color 0.2s;
+}
+
+.btn-add-todo:hover {
+  background-color: #0056b3;
+}
+
+.btn-add-todo:disabled {
+  background-color: #e3f2fd; 
+  color: #90caf9;            
+  border: 1px solid #bbdefb;
   cursor: not-allowed;
 }
