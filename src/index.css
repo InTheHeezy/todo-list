@@ -116,20 +116,20 @@ body {
   gap: 5px;              
 }
 
-/* --- THE LEFT-ALIGNED ROWS INSIDE THE CONTAINER --- */
+
 .todo-list-item {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Keeps the checkmarks flush with the left edge of the column */
+  justify-content: flex-start; 
   width: 100%;
   font-size: 1.05rem;
 }
 
-/* Target the label tag inside your list item */
+
 .todo-list-item label {
   display: flex;
   align-items: center;
-  gap: 8px;                   /* Clean spacing between the checkbox box and your text */
+  gap: 8px;                   
   cursor: pointer;
   width: 100%;
 }
