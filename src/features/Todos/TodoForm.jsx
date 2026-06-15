@@ -19,7 +19,7 @@ function TodoForm({ onAddTodo }) {
   };
 
     return (
-        <form onSubmit={handleAddTodo}>
+        <form onSubmit={handleAddTodo} className="todo-form">
           <TextInputWithLabel 
             elementId="todoTitle"
             labelText="Todo"
@@ -27,7 +27,11 @@ function TodoForm({ onAddTodo }) {
             inputRef={inputRef}
             value={workingTodoTitle}
           />
-          <button type="submit" disabled={!isValidTodoTitle(workingTodoTitle)}>
+          <button 
+            type="submit" 
+            className="btn-add-todo"
+            disabled={!isValidTodoTitle(workingTodoTitle)}
+          >
             Add Todo
           </button>
         </form>

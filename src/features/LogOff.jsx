@@ -24,13 +24,12 @@ export function Logoff() {
     };
 
     return (
-            <div>
-                <button 
-                    onClick={handleLogOff}
-                    disabled={isLoggingOff}
-                >
-                    {isLoggingOff ? 'Logging out' : 'Log out'}    
-                </button>
-            </div>
+        <button 
+            className='btn-logout'
+            onClick={handleLogOff}
+            disabled={isLoggingOff}
+        >
+            {isLoggingOff ? 'Logging out' : 'Log out'}    
+        </button>
         )
 }

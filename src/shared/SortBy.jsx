@@ -5,8 +5,8 @@ export default function SortBy({
     onSortDirectionChange
 }) {
     return (
-        <div>
-            <label htmlFor="sortBySelect">Sort By:</label>
+        <div className="sort-by">
+            <label htmlFor="sortBySelect">Sort By :</label>
             <select 
                 id="sortBySelect" 
                 value={sortBy} 
@@ -15,7 +15,7 @@ export default function SortBy({
                 <option value="createdAt">Creation Date</option>
                 <option value="title">Title</option>
             </select>
-            <label htmlFor="sortByDirection">Order</label>
+            <label htmlFor="sortByDirection">Order :</label>
             <select 
                 id="sortByDirection" 
                 value={sortDirection} 

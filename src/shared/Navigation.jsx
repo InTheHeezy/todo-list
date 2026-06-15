@@ -20,23 +20,23 @@ export default function Navigation(){
     };
 
     return (
-        <nav>
-            <ul style={listStyle}>
+        <nav className="nav-links"> 
+            <ul>
                 <li>
-                    <NavLink to="/about" style={navLinkStyle}>About</NavLink>
+                    <NavLink to="/about">About</NavLink>
                 </li>
                 {isAuthenticated ? (
                     <>
                         <li>
-                            <NavLink to="/todos" style={navLinkStyle}>Todos</NavLink>    
+                            <NavLink to="/todos">Todos</NavLink>    
                         </li>
                         <li>
-                            <NavLink to="/profile" style={navLinkStyle}>Profile</NavLink>
+                            <NavLink to="/profile">Profile</NavLink>
                         </li>
                     </>
                 ) : (
                     <li>
-                      <NavLink to="/login" style={navLinkStyle}>Login</NavLink>  
+                      <NavLink to="/login">Login</NavLink>  
                     </li>
                 )}
             </ul>

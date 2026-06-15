@@ -30,7 +30,7 @@ function TodoListItem({todo = {}, onCompleteTodo, onUpdateTodo}) {
     }
 
     return (
-        <li>
+        <li className="todo-list-item">
             {isEditing ? (
                 <form onSubmit={handleUpdate}>
                     <TextInputWithLabel 

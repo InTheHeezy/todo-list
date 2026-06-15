@@ -8,6 +8,7 @@ import { initialTodoState, TODO_ACTIONS, todoReducer } from '../reducers/todoRed
 import { useAuth } from '../contexts/AuthContext'; 
 import { useSearchParams } from 'react-router';
 import StatusFilter from '../shared/StatusFilter';
+import { sanitizeInput } from '../utils/sanitize';
 
 export default function TodosPage() {
     
@@ -66,16 +67,17 @@ export default function TodosPage() {
         dispatch ({
             type: TODO_ACTIONS.INCREMENT_VERSION
         });
-        //console.log("Invalidating memo cache after todo mutation");
     },[]);
 
     async function updateTodo(editedTodo) {
         const originalTodo = state.todoList.find((todo) => todo.id === editedTodo.id);
         if(!originalTodo) return;
 
+        const cleanTitle = sanitizeInput(editedTodo.title);
+
         dispatch ({
             type: TODO_ACTIONS.UPDATE_TODO_START,
-            payload: editedTodo
+            payload: {...editedTodo, title: cleanTitle}
         });
 
         try {
@@ -87,7 +89,7 @@ export default function TodosPage() {
                 },
                 credentials: 'include',
                 body:JSON.stringify({
-                    title: editedTodo.title,
+                    title: cleanTitle,
                     isCompleted: editedTodo.isCompleted,
                 })
             });
@@ -107,10 +109,11 @@ export default function TodosPage() {
     }
 
     async function addTodo(todoTitle) {
+        const cleanTitle = sanitizeInput(todoTitle)
         const tempId = Date.now().toString();
         const newTodo = {
         id: tempId,
-        title: todoTitle,
+        title: cleanTitle,
         isCompleted: false
         };
         
@@ -187,7 +190,7 @@ export default function TodosPage() {
     }
 
     return (
-        <div>
+        <div className='todos-page'>
             {state.error && ( 
                 <div>
                     <p>{state.error}</p>
@@ -204,6 +207,7 @@ export default function TodosPage() {
             {state.isTodoListLoading && (
                 <div>Loading todo list...</div>
             )}
+            <StatusFilter />
             <SortBy 
                 sortBy={state.sortBy} 
                 onSortByChange={(newSortBy) => 
@@ -212,7 +216,6 @@ export default function TodosPage() {
                 onSortDirectionChange={(newDirection) => 
                     dispatch({ type: TODO_ACTIONS.SET_SORT, payload: { sortDirection: newDirection} })}
             />
-            <StatusFilter />
             <FilterInput 
                 filterTerm={state.filterTerm}
                 onFilterChange={(newFilter) => 
