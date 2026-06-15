@@ -5,7 +5,8 @@ export default function TextInputWithLabel({
     labelText,
     onChange,
     inputRef,
-    value
+    value,
+    maxLength = 100
 }) {
     
     return (
@@ -18,6 +19,7 @@ export default function TextInputWithLabel({
                 value={value}
                 onChange={onChange}
                 placeholder="Add a todo..."
+                maxLength={maxLength}
             />
         </div>      
     );

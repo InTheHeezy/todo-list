@@ -51,6 +51,7 @@ export default function LoginPage() {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         disabled={isLoggingOn}
+                        maxLength={254}
                     />
                 </div>
                 <div className={styles.inputGroup}>
@@ -62,6 +63,7 @@ export default function LoginPage() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                         disabled={isLoggingOn}
+                        maxLength={128}
                     />
                 </div>
                 <button type="submit" className="btnLogin" disabled={isLoggingOn}>
