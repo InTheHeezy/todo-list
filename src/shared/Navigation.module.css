@@ -16,6 +16,8 @@
   margin-left: 20px;
   font-weight: normal;
   transition: color .2s ease;
+  padding: 12px 8px;
+  display: inline-block;
 }
 
 .navLinks a:hover, 

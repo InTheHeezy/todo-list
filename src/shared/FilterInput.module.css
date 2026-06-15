@@ -1,6 +1,8 @@
 .filterInput {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin-bottom: 20px; 
   gap: 8px;
+  width: 100%;
 }
