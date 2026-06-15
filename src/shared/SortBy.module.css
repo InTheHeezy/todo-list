@@ -1,0 +1,6 @@
+.sortBy {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  gap: 8px;
+}

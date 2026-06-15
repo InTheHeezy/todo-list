@@ -1,0 +1,24 @@
+.btnLogOut {
+  justify-self: end;       
+  align-self: center;      
+  width: max-content;      
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  padding: 8px 18px;       
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  line-height: 1.2;
+  transition: background-color 0.2s ease;
+}
+
+.btnLogOut:hover {
+  background-color: #0056b3;
+}
+
+.btnLogOut:disabled {
+  background-color: #a0cfff;
+  cursor: not-allowed;
+}

@@ -1,0 +1,8 @@
+.aboutPage {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: auto; 
+  padding: 40px 20px;
+  flex-direction: column;
+}

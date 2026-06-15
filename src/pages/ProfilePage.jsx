@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"; // Changed to use useState as requested
 import { useAuth } from "../contexts/AuthContext";
+import styles from "./ProfilePage.module.css"
 
 export default function ProfilePage() {
 
@@ -49,14 +50,14 @@ export default function ProfilePage() {
         : 0;
 
     return (
-        <div className="profile-page">
+        <div className={styles.profilePage}>
             <h1>User Profile</h1>
-            <section className="profile-page-name">
+            <section className={styles.profilePageName}>
                 <h2>Name: {email}</h2>
                 <p>Status: {token ? "Authenticated" : "Not Authenticated"}</p>
             </section>
             
-            <section className="profile-page-stats">
+            <section className={styles.profilePageStats}>
                 <h2>Todo Stats</h2>
                 
                 {isLoading && (
@@ -68,22 +69,22 @@ export default function ProfilePage() {
                 )}
                 
                 {!isLoading && !error && (
-                    <div className="profile-page-stats">
-                        <div className="profile-page-stats">
+                    <div className={styles.profilePageStats}>
+                        <div className={styles.profilePageStats}>
                             <h3>Total</h3>
                             <p>{stats.total}</p>
                         </div>
-                        <div className="profile-page-stats">
+                        <div className={styles.profilePageStats}>
                             <h3>Active</h3>
                             <p>{stats.active}</p>
                         </div>
-                        <div className="profile-page-stats">
+                        <div className={styles.profilePageStats}>
                             <h3>Completed</h3>
                             <p>{stats.completed}</p>
                         </div>
 
                         {stats.total > 0 && (
-                            <div className="profile-page-stats">
+                            <div className={styles.profilePageStats}>
                                 <h3>Completion Rate</h3>
                                 <p>{completionPercentage}%</p>
                             </div>

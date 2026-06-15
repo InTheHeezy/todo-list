@@ -1,3 +1,5 @@
+import styles from "./SortBy.module.css"
+
 export default function SortBy({
     sortBy,
     sortDirection,
@@ -5,7 +7,7 @@ export default function SortBy({
     onSortDirectionChange
 }) {
     return (
-        <div className="sort-by">
+        <div className={styles.sortBy}>
             <label htmlFor="sortBySelect">Sort By :</label>
             <select 
                 id="sortBySelect" 

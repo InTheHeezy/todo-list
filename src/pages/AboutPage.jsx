@@ -1,6 +1,8 @@
+import styles from "./AboutPage.module.css"
+
 export default function AboutPage() {
     return (
-        <div className="about-page">
+        <div className={styles.aboutPage}>
             <h1>About this Todo App</h1>
             <p>This was made by Tonny An during a Code The Dream apprentenceship in Spring 2026 - Summer 2026</p>
             <h2>App features</h2>

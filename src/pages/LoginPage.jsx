@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 import { sanitizeInput } from "../utils/sanitize";
+import styles from "./LoginPage.module.css"
 
 export default function LoginPage() {
     const { login, isAuthenticated } = useAuth();
@@ -39,10 +40,10 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="login-page">
+        <div className={styles.loginPage}>
             <form onSubmit={handleSubmit}>
-                {authError && <div className="auth-error">{authError}</div>}
-                <div className="input-group">
+                {authError && <div className="authError">{authError}</div>}
+                <div className={styles.inputGroup}>
                     <label htmlFor='email'>Email</label>
                     <input
                         id='email'
@@ -52,7 +53,7 @@ export default function LoginPage() {
                         disabled={isLoggingOn}
                     />
                 </div>
-                <div className="input-group">
+                <div className={styles.inputGroup}>
                     <label htmlFor='password'>Password</label>
                     <input
                         id='password'
@@ -63,7 +64,7 @@ export default function LoginPage() {
                         disabled={isLoggingOn}
                     />
                 </div>
-                <button type="submit" className="btn-login" disabled={isLoggingOn}>
+                <button type="submit" className="btnLogin" disabled={isLoggingOn}>
                     {isLoggingOn ? 'Logging on...' : 'Logon'}
                 </button>
             </form>
