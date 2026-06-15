@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
+import { sanitizeInput } from "../utils/sanitize";
 
 export default function LoginPage() {
     const { login, isAuthenticated } = useAuth();
@@ -26,7 +27,10 @@ export default function LoginPage() {
         setAuthError('');
         setIsLoggingOn(true)
         
-        const result = await login(email, password);
+        const cleanEmail = sanitizeInput(email);
+        const cleanPassword = sanitizeInput(password)
+
+        const result = await login(cleanEmail, cleanPassword);
 
         if (!result.success) {
             setAuthError(result.error);

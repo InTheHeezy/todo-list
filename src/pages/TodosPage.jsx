@@ -8,6 +8,7 @@ import { initialTodoState, TODO_ACTIONS, todoReducer } from '../reducers/todoRed
 import { useAuth } from '../contexts/AuthContext'; 
 import { useSearchParams } from 'react-router';
 import StatusFilter from '../shared/StatusFilter';
+import { sanitizeInput } from '../utils/sanitize';
 
 export default function TodosPage() {
     
@@ -72,9 +73,11 @@ export default function TodosPage() {
         const originalTodo = state.todoList.find((todo) => todo.id === editedTodo.id);
         if(!originalTodo) return;
 
+        const cleanTitle = sanitizeInput(editedTodo.title);
+
         dispatch ({
             type: TODO_ACTIONS.UPDATE_TODO_START,
-            payload: editedTodo
+            payload: {...editedTodo, title: cleanTitle}
         });
 
         try {
@@ -86,7 +89,7 @@ export default function TodosPage() {
                 },
                 credentials: 'include',
                 body:JSON.stringify({
-                    title: editedTodo.title,
+                    title: cleanTitle,
                     isCompleted: editedTodo.isCompleted,
                 })
             });
@@ -106,10 +109,11 @@ export default function TodosPage() {
     }
 
     async function addTodo(todoTitle) {
+        const cleanTitle = sanitizeInput(todoTitle)
         const tempId = Date.now().toString();
         const newTodo = {
         id: tempId,
-        title: todoTitle,
+        title: cleanTitle,
         isCompleted: false
         };
         
