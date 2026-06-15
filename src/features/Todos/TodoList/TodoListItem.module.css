@@ -1,0 +1,16 @@
+.todoListItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; 
+  width: 100%;
+  font-size: 1.05rem;
+}
+
+
+.todoListItem label {
+  display: flex;
+  align-items: center;
+  gap: 8px;                   
+  cursor: pointer;
+  width: 100%;
+}

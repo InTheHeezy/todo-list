@@ -14,7 +14,7 @@ function StatusFilter() {
   };
 
   return (
-    <div className='status-filter'>
+    <div className='statusFilter'>
       <label htmlFor='statusFilter'>Show :</label>
       <select
         id='statusFilter'

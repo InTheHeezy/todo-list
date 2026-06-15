@@ -1,0 +1,26 @@
+.navLinks {
+  justify-self: center;
+}
+
+.navLinks ul {
+  list-style-type: none; 
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;    
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: #666;
+  margin-left: 20px;
+  font-weight: normal;
+  transition: color .2s ease;
+}
+
+.navLinks a:hover, 
+.navLinks a:global(.active) {
+  color: #0070f3; 
+  font-weight: bold;
+  text-decoration: underline;
+}

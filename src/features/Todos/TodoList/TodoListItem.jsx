@@ -2,6 +2,7 @@ import { useState } from "react";
 import TextInputWithLabel from "../../../shared/TextInputWithLabel";
 import { isValidTodoTitle } from "../../../utils/todoValidation";
 import { useEditableTitle } from "../../../hooks/useEditableTitle";
+import styles from "./TodoListItem.module.css"
 
 function TodoListItem({todo = {}, onCompleteTodo, onUpdateTodo}) {
     
@@ -30,7 +31,7 @@ function TodoListItem({todo = {}, onCompleteTodo, onUpdateTodo}) {
     }
 
     return (
-        <li className="todo-list-item">
+        <li className={styles.todoListItem}>
             {isEditing ? (
                 <form onSubmit={handleUpdate}>
                     <TextInputWithLabel 

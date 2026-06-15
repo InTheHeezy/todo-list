@@ -9,6 +9,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useSearchParams } from 'react-router';
 import StatusFilter from '../shared/StatusFilter';
 import { sanitizeInput } from '../utils/sanitize';
+import styles from './TodosPage.module.css'
 
 export default function TodosPage() {
     
@@ -190,7 +191,7 @@ export default function TodosPage() {
     }
 
     return (
-        <div className='todos-page'>
+        <div className={styles.todosPage}>
             {state.error && ( 
                 <div>
                     <p>{state.error}</p>
