@@ -11,7 +11,6 @@ function TodoList({
 }) {
 
   const filteredTodoList = useMemo(() => {
-    //console.log(`Recalculating filtered todos (v${dataVersion})`)
     let filteredTodos;
     switch (statusFilter) {
       case 'completed':
