@@ -6,7 +6,17 @@
   align-items: flex-end;
 }
 
-.formInputGroup{
+.todoForm > div {
+  flex: 1;
+  margin-bottom: 0 !important;
+}
+
+.todoForm > div input {
+  height: 46px;
+  box-sizing: border-box;
+}
+
+.formInputGroup {
   flex: 1;               
   margin-bottom: 0;      
 }
@@ -21,9 +31,9 @@
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
-  height: 45px; 
   box-sizing: border-box;
   transition: background-color 0.2s;
+  height: 46px; 
 }
 
 .btnAddTodo:hover {
