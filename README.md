@@ -52,6 +52,10 @@ A TODO management application built with React that allows users, through authen
 * Custom reusable React hooks
 * Centralized state management using `useReducer`
 
+### 🛡️ Security
+
+* DOMPurify to remove HTML tags  and attributes
+
 ---
 
 ## 🛠️ Technologies used
@@ -118,6 +122,7 @@ src/
 │   └── SortBy.jsx
 │
 ├── utils/
+│   ├── sanitize.js
 │   ├── todoValidation.js
 │   └── useDebounce.js
 │
